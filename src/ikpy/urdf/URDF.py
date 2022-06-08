@@ -246,6 +246,10 @@ def get_urdf_parameters(urdf_file, base_elements=None, last_link_vector=None, ba
                 origin_orientation = [float(x) for x in origin.attrib["rpy"].split()]
 
         joint_type = joint.attrib["type"]
+        
+        if joint_type == "continuous":
+            joint_type = "revolute"
+        
         if joint_type not in ["revolute", "prismatic", "fixed"]:
             raise ValueError("Unknown joint type: {}".format(joint_type))
 
